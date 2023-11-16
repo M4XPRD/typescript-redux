@@ -1,7 +1,7 @@
 import NewTodo from 'features/Todo/NewTodo';
 import AsyncTodoList from 'features/AsyncTodo/AsyncTodoList';
-import NewAsyncTodo from 'features/AsyncTodo/NewAsyncTodo';
 import TodoList from './features/Todo/TodoList';
+import NewAsyncTodo from './features/AsyncTodo/NewAsyncTodo';
 import './App.css';
 
 const App = () => (

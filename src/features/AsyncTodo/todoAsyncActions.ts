@@ -1,42 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Todo } from 'types';
-import { TodoSlice } from './asyncTodoSlice';
 
-export const fetchAllTodos = createAsyncThunk<
-Todo[],
-undefined,
-{ state: { asyncTodos: TodoSlice } }
->(
+export const fetchAllTodos = createAsyncThunk(
   'todos/fetchTodos',
   async () => {
     const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10');
-
-    return response.json();
-  },
-  {
-    condition: (_, { getState }) => {
-      const { status } = getState().asyncTodos;
-
-      if (status === 'loading') {
-        return false;
-      }
-    },
+    return (await response.json()) as Todo[];
   },
 );
 
-export const createTodo = createAsyncThunk<
-Todo,
-string
->(
-  'todo/createTodo',
-  async (text) => {
+export const createTodo = createAsyncThunk(
+  'todos/createTodo',
+  async (text: string) => {
     const newTodo: Required<Omit<Todo, 'id'>> = {
       title: text,
       userId: 1,
       completed: false,
     };
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,6 +26,6 @@ string
       body: JSON.stringify(newTodo),
     });
 
-    return response.json();
+    return (await response.json()) as Todo;
   },
 );

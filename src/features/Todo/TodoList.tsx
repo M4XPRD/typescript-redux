@@ -1,9 +1,9 @@
 import TodoItem from 'components/TodoItem';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'redux-hook';
+import useAppDispatch from 'redux-hook';
 import { Todo } from 'types';
-import { selectAllTodos } from './todoSelectors';
+import { useSelector } from 'react-redux';
 import { removeTodo, toggleTodo } from './todoSlice';
+import selectAllTodos from './todoSelector';
 
 const TodoList = () => {
   const list = useSelector(selectAllTodos);
@@ -19,8 +19,15 @@ const TodoList = () => {
 
   return (
     <ul>
-      {list.map((todo) => (
-        <TodoItem key={todo.id} removeTodo={handleRemoveTodo} toggleTodo={handleToggleTodo} {...todo} />
+      {list.map((todo: Todo) => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          title={todo.title}
+          completed={todo.completed}
+          removeTodo={handleRemoveTodo}
+          toggleTodo={handleToggleTodo}
+        />
       ))}
     </ul>
   );

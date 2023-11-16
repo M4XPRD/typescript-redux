@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef } from 'react'; // Для неуправляемой формы
 
 interface NewItemProps {
   placeholder: string,
@@ -6,7 +6,7 @@ interface NewItemProps {
 }
 
 const NewItem = ({ handleClick, placeholder }: NewItemProps) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onClick = () => {
     if (inputRef.current) {
@@ -22,7 +22,7 @@ const NewItem = ({ handleClick, placeholder }: NewItemProps) => {
         placeholder={placeholder}
         ref={inputRef}
       />
-      <button onClick={onClick}>Add todo</button>
+      <button type="button" onClick={onClick}>Add todo</button>
     </>
   );
 };

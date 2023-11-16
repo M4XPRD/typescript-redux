@@ -1,6 +1,5 @@
+import useAppDispatch from 'redux-hook';
 import AddNewItem from 'components/NewItem';
-
-import { useAppDispatch } from 'redux-hook';
 import { addTodo } from './todoSlice';
 
 const NewTodo = () => {
@@ -12,7 +11,7 @@ const NewTodo = () => {
 
   return (
     <AddNewItem
-      placeholder="add new todo"
+      placeholder="Add new todo"
       handleClick={handleNewTodo}
     />
   );

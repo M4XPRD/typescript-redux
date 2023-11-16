@@ -1,9 +1,9 @@
 import TodoItem from 'components/TodoItem';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'redux-hook';
+import useAppDispatch from 'redux-hook';
 import { Todo } from 'types';
-import { selectAsyncTodos } from './asyncTodoSelectors';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import selectAsyncTodos from './asyncTodoSelector';
 import { fetchAllTodos } from './todoAsyncActions';
 
 const AsyncTodoList = () => {
@@ -20,13 +20,19 @@ const AsyncTodoList = () => {
 
   useEffect(() => {
     dispatch(fetchAllTodos());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <ul>
-      {list.map((todo) => (
-        <TodoItem key={todo.id} removeTodo={handleRemoveTodo} toggleTodo={handleToggleTodo} {...todo} />
+      {list.map((todo: Todo) => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          title={todo.title}
+          completed={todo.completed}
+          removeTodo={handleRemoveTodo}
+          toggleTodo={handleToggleTodo}
+        />
       ))}
     </ul>
   );
